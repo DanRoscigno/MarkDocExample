@@ -4,50 +4,35 @@ import Link from 'next/link';
 
 const items = [
   {
-    title: 'Get started',
+    title: 'Table Design',
     links: [
-      { href: '/docs/overview', children: 'What is Markdoc?' },
-      { href: '/docs/getting-started', children: 'Installation' },
-      { href: '/docs/faq', children: 'FAQ' },
-      { href: '/sandbox', children: 'Try it out' }
-    ]
-  },
-  {
-    title: 'Core concepts',
-    links: [
-      { href: '/docs/syntax', children: 'Syntax and schema' },
-      { href: '/docs/nodes', children: 'Nodes' },
-      { href: '/docs/tags', children: 'Tags' },
-      { href: '/docs/attributes', children: 'Attributes' },
-      { href: '/docs/variables', children: 'Variables' },
-      { href: '/docs/functions', children: 'Functions' },
-      {
-        href: '/docs/render',
-        children: 'Rendering'
+      { href: '/docs/loading/Loading_intro', children: 'Understanding StarRocks table design', subLinks: []},
+      { href: '/docs/loading/Loading_intro', children: 'Table Types',
+        subLinks: [
+          { href: '/docs/loading/BrokerLoad', children: 'Loading with Broker Load' },
+          { href: '/docs/loading/DataX-starrocks-writer', children: 'DataX' },
+          { href: '/docs/loading/Etl_in_loading', children: 'Transform data at loading' },
+          { href: '/docs/loading/Flink-connector-starrocks', children: 'Continuos load with Apache Flink' },
+          { href: '/docs/loading/Flink_cdc_load', children: 'Realtime synchronization from MySQL' },
+          { href: '/docs/loading/InsertInto', children: 'Load data using INSERT' },
+          { href: '/docs/loading/Json_loading', children: 'Introduction' },
+          { href: '/docs/loading/Load_to_Primary_Key_tables', children: 'Change data through loading' },
+          { href: '/docs/loading/Loading_intro', children: 'Overview of data loading' },
+          { href: '/docs/loading/RoutineLoad', children: 'Continuously load data from Apache Kafka' },
+          { href: '/docs/loading/Spark-connector-starrocks', children: 'Load data using Spark connector' },
+          { href: '/docs/loading/SparkLoad', children: 'Load data in bulk using Spark Load' },
+          { href: '/docs/loading/StreamLoad', children: 'HTTP PUT' },
+          { href: '/docs/loading/Stream_Load_transaction_interface', children: 'Load data using Stream Load transaction interface' },
+          { href: '/docs/loading/cloud_storage_load', children: 'Load data from cloud storage' },
+          { href: '/docs/loading/hdfs_load', children: 'Load data from HDFS' },
+          //{ href: '/docs/loading/load_concept
+          { href: '/docs/loading/load_from_pulsar', children: '[Preview] Continuously load data from Apache® Pulsar' },
+
+
+        ]
       },
-      {
-        href: '/docs/config',
-        children: 'Config objects'
-      },
-      { href: '/docs/validation', children: 'Validation' }
     ]
   },
-  {
-    title: 'Integration guides',
-    links: [
-      { href: '/docs/examples', children: 'Common examples' },
-      { href: '/docs/examples/html', children: 'Using with HTML' },
-      { href: '/docs/nextjs', children: 'Using with Next.js' },
-      { href: '/docs/examples/react', children: 'Using with React' }
-    ]
-  },
-  {
-    title: 'Advanced concepts',
-    links: [
-      { href: '/docs/frontmatter', children: 'Frontmatter' },
-      { href: '/docs/partials', children: 'Partials' }
-    ]
-  }
 ];
 
 export function SideNav() {
@@ -66,6 +51,18 @@ export function SideNav() {
                   <Link {...link}>
                     <a href={link.href}>{link.children}</a>
                   </Link>
+            {link.subLinks.map((subLink) => {
+              const active = router.pathname === subLink.href;
+              return (
+                <li key={subLink.href} className={active ? 'active' : ''}>
+                  <Link {...subLink}>
+                    <a href={subLink.href}>{subLink.children}</a>
+                  </Link>
+
+                </li>
+              );
+            })}
+
                 </li>
               );
             })}
