@@ -6,48 +6,9 @@ const items = [
   {
     title: 'Get started',
     links: [
-      { href: '/docs/overview', children: 'What is Markdoc?' },
-      { href: '/docs/getting-started', children: 'Installation' },
-      { href: '/docs/faq', children: 'FAQ' },
-      { href: '/sandbox', children: 'Try it out' }
+      { href: '/docs/overview', children: 'What is Markdoc?', subLinks: [{ href: '/docs/loading/BrokerLoad', children: 'Loading with Broker Load' }] },
     ]
   },
-  {
-    title: 'Core concepts',
-    links: [
-      { href: '/docs/syntax', children: 'Syntax and schema' },
-      { href: '/docs/nodes', children: 'Nodes' },
-      { href: '/docs/tags', children: 'Tags' },
-      { href: '/docs/attributes', children: 'Attributes' },
-      { href: '/docs/variables', children: 'Variables' },
-      { href: '/docs/functions', children: 'Functions' },
-      {
-        href: '/docs/render',
-        children: 'Rendering'
-      },
-      {
-        href: '/docs/config',
-        children: 'Config objects'
-      },
-      { href: '/docs/validation', children: 'Validation' }
-    ]
-  },
-  {
-    title: 'Integration guides',
-    links: [
-      { href: '/docs/examples', children: 'Common examples' },
-      { href: '/docs/examples/html', children: 'Using with HTML' },
-      { href: '/docs/nextjs', children: 'Using with Next.js' },
-      { href: '/docs/examples/react', children: 'Using with React' }
-    ]
-  },
-  {
-    title: 'Advanced concepts',
-    links: [
-      { href: '/docs/frontmatter', children: 'Frontmatter' },
-      { href: '/docs/partials', children: 'Partials' }
-    ]
-  }
 ];
 
 export function SideNav() {
@@ -66,6 +27,18 @@ export function SideNav() {
                   <Link {...link}>
                     <a href={link.href}>{link.children}</a>
                   </Link>
+            {link.subLinks.map((subLink) => {
+              const active = router.pathname === subLink.href;
+              return (
+                <li key={subLink.href} className={active ? 'active' : ''}>
+                  <Link {...subLink}>
+                    <a href={subLink.href}>{subLink.children}</a>
+                  </Link>
+
+                </li>
+              );
+            })}
+
                 </li>
               );
             })}

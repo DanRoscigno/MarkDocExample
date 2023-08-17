@@ -12,6 +12,7 @@ import 'prismjs/components/prism-javascript.min';
 import 'prismjs/components/prism-json.min';
 import 'prismjs/components/prism-jsx.min';
 import 'prismjs/components/prism-markup.min';
+import 'prismjs/components/prism-sql.min';
 import 'prismjs/components/prism-toml.min';
 import 'prismjs/components/prism-typescript.min';
 import 'prismjs/components/prism-yaml.min';
